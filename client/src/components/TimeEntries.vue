@@ -79,28 +79,16 @@
         totalTime: 1.5,
         date: '2016-04-08'
       }
-      return {
-        // Start out with the existing entry
-        // by placing it in the array
-        timeEntries: [existingEntry]
+      this.$dispatch('addTimeEntry', existingEntry)
+      return {        
       }
     },
     methods: {
-      // Get the index of the clicked time entry and splice it out
       deleteTimeEntry (timeEntry) {
-        let index = this.timeEntries.indexOf(timeEntry)
-        if (window.confirm('Are you sure you want to delete this time entry?')) {
-          this.timeEntries.splice(index, 1)
-          this.$dispatch('deleteTime', timeEntry)
-        }
+        this.$dispatch('addTimeEntry', timeEntry)
       }
     },
-    events: {
-      timeUpdate (timeEntry) {
-        this.timeEntries.push(timeEntry)
-        return true
-      }
-    }
+    props: ['timeEntries']
   }
 </script>
 

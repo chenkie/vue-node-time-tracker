@@ -58,6 +58,7 @@
       save () {
         let timeEntry = this.timeEntry
         this.$dispatch('addTimeEntry', timeEntry)
+        this.$route.router.go('/time-entries')
       }
     }
   }

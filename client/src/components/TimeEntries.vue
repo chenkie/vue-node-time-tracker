@@ -20,7 +20,7 @@
       
       <div class="list-group">
 
-        <a class="list-group-item" v-for="timeEntry in timeEntries">
+        <a class="list-group-item" v-for="timeEntry in timeEntries" track-by='$index'">
           <div class="row">
 
             <div class="col-sm-2 user-details">
@@ -51,7 +51,7 @@
             <div class="col-sm-1">
               <button 
                 class="btn btn-xs btn-danger delete-button"
-                @click="deleteTimeEntry(timeEntry)">
+                @click="deleteTimeEntry($index)">
                 X
               </button>
             </div>
@@ -66,26 +66,9 @@
 
 <script>
   export default {
-    data () {
-      // We want to start with an existing time entry
-      let existingEntry = {
-        user: {
-          firstName: 'Ryan',
-          lastName: 'Chenkie',
-          email: 'ryanchenkie@gmail.com',
-          image: 'https://1.gravatar.com/avatar/7f4ec37467f2f7db6fffc7b4d2cc8dc2?s=250&d=retro&r=g'
-        },
-        comment: 'First time entry',
-        totalTime: 1.5,
-        date: '2016-04-08'
-      }
-      this.$dispatch('addTimeEntry', existingEntry)
-      return {        
-      }
-    },
     methods: {
-      deleteTimeEntry (timeEntry) {
-        this.$dispatch('addTimeEntry', timeEntry)
+      deleteTimeEntry (index) {
+        this.$dispatch('deleteTimeEntry', index)
       }
     },
     props: ['timeEntries']

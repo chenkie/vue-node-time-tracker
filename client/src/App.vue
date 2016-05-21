@@ -19,29 +19,22 @@
             <h1 class="text-center">Total Time</h1>   
           </div>
           <div class="panel-body">
-            <h1 class="text-center">{{ time }} hours</h1>
+            <h1 class="text-center">{{ totalTime }} hours</h1>
           </div>
         </div>
       </div>
       <div class="col-sm-9">
-        <router-view :timeEntry=timeEntry></router-view>
+        <router-view :time-entries=timeEntries></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Sidebar from './components/Sidebar.vue'
-  
   export default {
-    components: { 'sidebar': Sidebar },
     data () {
       return {
-        // Start with the same value as our
-        // first time entry. Hard-coded for now
-        // because we'll use a different approach
-        // in the next article anyway
-        totalTime: 1.5,
+        totalTime: 0,
         timeEntries: []
       }
     },
@@ -50,11 +43,11 @@
         this.timeEntries.push(timeEntry)
         this.totalTime += parseFloat(timeEntry.totalTime)
       },
-      deleteTimeEntry (timeEntry) {
-        let index = this.timeEntries.indexOf(timeEntry)
+      deleteTimeEntry (index) {
         if (window.confirm('Are you sure you want to delete this time entry?')) {
-          this.timeEntries.splice(index, 1)
+          let timeEntry = this.timeEntries.splice(index, 1)[0]
           this.totalTime -= parseFloat(timeEntry.totalTime)
+        }
       }
     }
   }

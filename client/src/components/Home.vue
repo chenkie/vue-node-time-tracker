@@ -3,7 +3,7 @@
     <h1>Vue Time Tracker</h1>
     <p>
       <strong>
-        Get started by <a v-link="'/time-entries'">creating a time entry</a>.
+        Get started by <router-link to="/time-entries">creating a time entry</router-link>.
       </strong>
     </p>  
   </div>

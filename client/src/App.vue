@@ -7,8 +7,8 @@
           Vue Time Tracker
         </a>
         <ul class="nav navbar-nav">
-          <li><a v-link="'/home'">Home</a></li>
-          <li><a v-link="'/time-entries'">Time Entries</a></li>
+          <li><router-link to="/home">Home</router-link></li>
+          <li><router-link to="/time-entries">Time Entries</router-link></li>
         </ul>
       </div>
     </nav>
@@ -17,7 +17,7 @@
         <sidebar :time="totalTime"></sidebar>
       </div>
       <div class="col-sm-9">
-        <router-view></router-view>
+        <router-view @deleteTime="deleteTime" @timeUpdate="timeUpdate"></router-view>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
         totalTime: 1.5
       }
     },
-    events: {
+        methods: {
       // Increment the totalTime value based on the new
       // time entry that is dispatched up
       timeUpdate (timeEntry) {

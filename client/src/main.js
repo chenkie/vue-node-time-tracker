@@ -3,7 +3,7 @@ import App from './App.vue'
 import Home from './components/Home.vue'
 import TimeEntries from './components/TimeEntries.vue'
 import LogTime from './components/LogTime.vue'
-import Sidebar from './components/Sidebar.vue'
+
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
@@ -27,7 +27,6 @@ const routes = [{
 }]
 
 const router = new VueRouter({ routes })
-var bus = new Vue()
 
 const app = new Vue({
     router,

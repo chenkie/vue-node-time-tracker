@@ -3,6 +3,7 @@ import App from './App.vue'
 import Home from './components/Home.vue'
 import TimeEntries from './components/TimeEntries.vue'
 import LogTime from './components/LogTime.vue'
+
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
@@ -11,26 +12,26 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
-const router = new VueRouter()
-
-// Pointing routes to the components they should use
-router.map({
-  '/home': {
+const routes = [{
+    path: '/home',
     component: Home
-  },
-  '/time-entries': {
+}, {
+    path: '/time-entries',
     component: TimeEntries,
-    subRoutes: {
-      '/log-time': {
-        component: LogTime
-      }
+    children: [
+        { path: 'log-time', component: LogTime },
+    ]
+}, {
+    path: '/time-entries/log-time2',
+    component: { template: '<div>root component</div>' }
+}]
+
+const router = new VueRouter({ routes })
+
+const app = new Vue({
+    router,
+    components: {
+        App
     }
-  }
-})
 
-// Any invalid route will redirect to home
-router.redirect({
-  '*': '/home'
-})
-
-router.start(App, '#app')
+}).$mount('#app')

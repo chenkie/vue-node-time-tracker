@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <button
-      v-if="$route.path !== '/time-entries/log-time'"
-      v-link="'/time-entries/log-time'"
-      class="btn btn-primary">
-      Log Time
-    </button>
+	<div>
+		<button v-if="$route.path !== '/time-entries/log-time'" class="btn btn-primary">
+            <router-link to="/time-entries/log-time">Log Time</router-link>
+        </button>
 
     <div v-if="$route.path === '/time-entries/log-time'">
       <h3>Log Time</h3>     
@@ -13,7 +10,7 @@
 
     <hr>
 
-    <router-view></router-view>
+		<router-view @timeUpdate="timeUpdate"></router-view>
 
     <div class="time-entries">
       <p v-if="!timeEntries.length"><strong>No time entries yet</strong></p>
@@ -91,11 +88,10 @@
         let index = this.timeEntries.indexOf(timeEntry)
         if (window.confirm('Are you sure you want to delete this time entry?')) {
           this.timeEntries.splice(index, 1)
-          this.$dispatch('deleteTime', timeEntry)
-        }
+          // this.$dispatch('deleteTime', timeEntry)
+          this.$emit('deleteTime', timeEntry)
       }
     },
-    events: {
       timeUpdate (timeEntry) {
         this.timeEntries.push(timeEntry)
         return true
